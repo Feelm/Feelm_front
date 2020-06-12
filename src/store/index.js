@@ -12,6 +12,11 @@ export default new Vuex.Store({
   state: {
     authToken: cookies.get('auth-token'),
   },
+  getters: {
+    // cookies.isKey('auth-token')에서 변경 => 토큰 변경상황마다 일일히 실행해줄 필요가 없다
+    isLoggedIn: state => !!state.authToken,
+    config: state => ({ headers: { Authorization: `Token ${state.authToken}` } })
+  },
   mutations: {
     SET_TOKEN(state, token) {
       state.authToken = token

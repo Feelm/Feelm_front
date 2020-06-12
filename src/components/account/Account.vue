@@ -7,6 +7,7 @@
       <v-toolbar-title>로고넣을곳</v-toolbar-title>
       <v-icon @click="drawer = true">mdi-account</v-icon>
       <!-- <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon> -->
+      l1I|
 
     </v-app-bar>
 
@@ -18,8 +19,9 @@
       width="400"
       class="container"
     >
-      <div v-if="isLoggedIn">
+      <div v-if="$store.state.isLoggedIn">
         로그인댐
+        이제 여기에 프로필 만들거
       </div>
       <div v-else>
         <AccountForm/>
@@ -41,7 +43,6 @@ export default {
   data() {
     return {
       drawer: false,
-      isLoggedIn: false,
     }
   },
 }

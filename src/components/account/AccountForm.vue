@@ -7,6 +7,7 @@
     lazy-validation
     
   >
+  <!-- 로그인 폼 -->
     <v-text-field
       v-model="email"
       :rules="emailRules"
@@ -26,7 +27,7 @@
       :disabled="!valid"
       color="success"
       class="mr-4"
-      @click="validate"
+      @click="runLogin"
     >
       로그인
     </v-btn>
@@ -110,7 +111,6 @@ export default {
   name: "AccountForm",
   data: () => ({
     valid: true,
-    isLoggedIn: false,
     isSignedUp: false,
     email: '',
     emailRules: [
@@ -122,7 +122,6 @@ export default {
       v => !!v || '비밀번호를 입력해주세요',
       v => (v && v.length >= 10) || '비밀번호는 10자 이상입니다',
     ],
-
     password2: '',
     name: '',
     age: null,
@@ -130,11 +129,11 @@ export default {
       '남자',
       '여자',
     ],
-    // checkbox: false,
     select:'',
   }),
   methods: {
     ...mapActions(['signup']),
+    ...mapActions(['login']),
     validate () {
       this.$refs.form.validate()
     },
@@ -154,6 +153,14 @@ export default {
         sex: this.select,
       }
       this.signup(signupData)
+    },
+    runLogin () {
+      // console.log(this.$cookies.isKey('auth-token'))
+      const loginData = {
+        email: this.email,
+        password: this.password,
+      }
+      this.login(loginData)
     },
     
   },
