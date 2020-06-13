@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import cookies from 'vue-cookies'
 import axios from 'axios'
-import router from '@/router'
+// import router from '@/router/index.js'
 import SERVER from '@/api/djangoAPI'
 
 
@@ -30,11 +30,13 @@ export default new Vuex.Store({
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
           commit('SET_TOKEN', res.data.key)
-          router.push({ name: '' })
+          // router.push({ name: 'About' })
+          // router.go()
         })
         .catch(err => console.log(err.response.data))
     },
     login({ dispatch }, loginData) {
+      // console.log(this.getters.isLoggedIn, '로그인확인')
       const info = {
         data: loginData,
         location: SERVER.ROUTES.login,

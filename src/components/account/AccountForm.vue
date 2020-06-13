@@ -120,7 +120,7 @@ export default {
     password: '',
     passwordRules: [
       v => !!v || '비밀번호를 입력해주세요',
-      v => (v && v.length >= 10) || '비밀번호는 10자 이상입니다',
+      v => (v && v.length >= 4) || '비밀번호는 4자 이상입니다',
     ],
     password2: '',
     name: '',
@@ -131,6 +131,7 @@ export default {
     ],
     select:'',
   }),
+
   methods: {
     ...mapActions(['signup']),
     ...mapActions(['login']),
@@ -150,7 +151,7 @@ export default {
         password2: this.password2,
         name: this.name,
         age: this.age,
-        sex: this.select,
+        sex: this.select==='남자'?0:1,
       }
       this.signup(signupData)
     },

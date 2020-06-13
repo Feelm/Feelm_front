@@ -19,7 +19,7 @@
       width="400"
       class="container"
     >
-      <div v-if="$store.state.isLoggedIn">
+      <div v-if="isLoggedIn">
         로그인댐
         이제 여기에 프로필 만들거
       </div>
@@ -43,8 +43,14 @@ export default {
   data() {
     return {
       drawer: false,
+      // isLoggedIn: this.$store.getters.isLoggedIn,
     }
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn
+    }
+  }
 }
 </script>
 
