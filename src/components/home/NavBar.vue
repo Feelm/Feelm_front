@@ -1,16 +1,20 @@
 <template>
-  <v-app id="inspire">
+  <!-- <v-app id="inspire">
     <v-card
       class="mx-auto overflow-hidden"
       height="100%"
       width="100%"
     >
-      <div id="account">
-        <Account/>
-      </div>
+    <div id="account">
+      <Account/>
+    </div>
+    
       
     </v-card>
-  </v-app>
+  </v-app> -->
+  <div id="account">
+    <Account/>
+  </div>
 </template>
 
 <script>
