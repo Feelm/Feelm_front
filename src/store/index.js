@@ -23,13 +23,13 @@ export default new Vuex.Store({
     SET_TOKEN(state, token) {
       state.authToken = token
       cookies.set('auth-token', token)
-      console.log('쿠키설정성공')
+      // console.log('쿠키설정성공')
     },
     set_userInfo(state, info){
       state.userInfo = info
     },
     set_videoId(state, videoId){
-      console.log('id세팅', videoId)
+      // console.log('id세팅', videoId)
       state.videoId = videoId
     },
   },
@@ -62,19 +62,19 @@ export default new Vuex.Store({
       dispatch('postAuthData', info)
     },
     async logout({ getters, commit }) {
-      const res = await axios.post(SERVER.URL + SERVER.ROUTES.logout, null, getters.config)
-      console.log(res)
+      await axios.post(SERVER.URL + SERVER.ROUTES.logout, null, getters.config)
+      // console.log(res)
       commit('SET_TOKEN', null)  // state 에서도 삭제
       cookies.remove('auth-token')  // cookie 에서는 삭제
       this.state.userInfo = null // 유저 정보 삭제
     },
     async authInfo({commit }, k) {
       const resKey = await k
-      console.log(resKey, 'res')
+      // console.log(resKey, 'res')
       const customHeader= {headers: {Authorization: `Token ${resKey.data.key}`} }
-      console.log(customHeader, '커스텀헤더')
+      // console.log(customHeader, '커스텀헤더')
       const res = await axios.get(SERVER.URL + SERVER.ROUTES.authInfo, customHeader)
-      console.log(res)
+      // console.log(res)
       commit('set_userInfo', res.data)
     },
     async getVideoId({commit}) {
@@ -88,7 +88,7 @@ export default new Vuex.Store({
         q: '타이타닉'+'trailer',
         maxResults: 1,
       }})
-      console.log(youtubeRes, '유튜브결과')
+      // console.log(youtubeRes, '유튜브결과')
       commit('set_videoId', youtubeRes.data.items[0].id.videoId)
     }
     

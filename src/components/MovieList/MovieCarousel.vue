@@ -5,14 +5,16 @@
       height="400"
       hide-delimiter-background
       show-arrows-on-hover>
-      <v-carousel-item v-for="(slide, i) in slides" :key="i">
-        <v-sheet :color="colors[i]" height="100%">
-          <v-row class="fill-height" align="center" justify="center">
+      <v-carousel-item v-for="movies in movieSet" :key="movies[0].id" class="container">
+        <div class="row">
+          <span v-for="movie in movies" :key="movie.id" class="col-2. m-auto">
+            <div class="d-inline">
+              <img :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="" class="w-100">
+              
+            </div>
+          </span>
+        </div>
 
-            
-            <div class="display-3">{{ slide }} Slide</div>
-          </v-row>
-        </v-sheet>
       </v-carousel-item>
     </v-carousel>
   </div>
@@ -21,27 +23,19 @@
 <script>
 export default {
   name: "MovieCarousel",
-  props: {
-    movies,
-  },
+  props: [
+    'movies',
+  ],
   data() {
     return {
-      colors: [
-        'indigo',
-        'warning',
-        'pink darken-2',
-        'red lighten-1',
-        'deep-purple accent-4',
-      ],
-      slides: [
-        'First',
-        'Second',
-        'Third',
-        'Fourth',
-        'Fifth',
-      ],
     }
   },
+  computed: {
+    movieSet() {
+      var array = [this.movies.slice(0,5),this.movies.slice(5)];
+      return array
+    }
+  }
 }
 </script>
 
