@@ -18,10 +18,10 @@
       class="container"
     >
       <div v-if="isLoggedIn">
+        <button @click="logout">로그아웃</button>
         <div v-if="!!userInfo">
           로그인댐
           <!-- <button @click="authInfo">정보가져와</button> -->
-          <button @click="logout">로그아웃</button>
           <p>이름 : {{userInfo.name}}</p>
           <p>나이 : {{userInfo.age}}</p>
           <p>성별 : {{userInfo.sex===0?'남자':'여자'}}</p>

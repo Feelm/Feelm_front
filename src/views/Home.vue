@@ -2,13 +2,16 @@
   <div class="home">
     <v-app id="inspire">
       <v-card
-        class="mx-auto overflow-hidden"
+        class="mx-auto overflow-hidden main"
         height="300%"
         width="100%"
+        color="rgba(0, 0, 0, 0.8)"
       >
         <NavBar/>
         <div class="container">
           <RecentTrailerPlayer/>
+          <br>
+          <MovieList/>
         </div>
         <br>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -24,7 +27,7 @@
 // @ is an alias to /src
 import NavBar from '../components/home/NavBar.vue'
 import RecentTrailerPlayer from '@/components/home/RecentTrailerPlayer.vue'
-// import MovieCarousel from '@/components/MovieCarousel.vue'
+import MovieList from '@/components/MovieList/MovieList.vue'
 // import HomeReviewList from '@/components/HomeReviewList.vue'
 // import HomeCommentList from '@/components/HomeCommentList.vue'
 
@@ -33,7 +36,7 @@ export default {
   components: {
     NavBar,
     RecentTrailerPlayer,
-    // MovieCarousel,
+    MovieList,
     // ReviewList,
     // CommentList,
   },
@@ -45,3 +48,7 @@ export default {
   // }
 }
 </script>
+
+<style>
+
+</style>
