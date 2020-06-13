@@ -7,8 +7,11 @@
         width="100%"
       >
         <NavBar/>
-
-        <RecentTrailerPlayer/>
+        <div class="container">
+          <RecentTrailerPlayer/>
+        </div>
+        <br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       </v-card>
     </v-app>
     <!-- <img alt="Vue logo" src="@/assets/logo.png"> -->
@@ -16,6 +19,8 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex'
+
 // @ is an alias to /src
 import NavBar from '../components/home/NavBar.vue'
 import RecentTrailerPlayer from '@/components/home/RecentTrailerPlayer.vue'
@@ -31,6 +36,12 @@ export default {
     // MovieCarousel,
     // ReviewList,
     // CommentList,
-  }
+  },
+  // methods: {
+  //   ...mapActions(['getVideoId'])
+  // },
+  // created() {
+  //   this.getVideoId()
+  // }
 }
 </script>

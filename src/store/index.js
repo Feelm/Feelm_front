@@ -4,13 +4,15 @@ import cookies from 'vue-cookies'
 import axios from 'axios'
 // import router from '@/router/index.js'
 import SERVER from '@/api/djangoAPI'
-
+import GOOGLE from '@/api/googleAPI'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     authToken: cookies.get('auth-token'),
+    userInfo: null,
+    videoId: null,
   },
   getters: {
     // cookies.isKey('auth-token')에서 변경 => 토큰 변경상황마다 일일히 실행해줄 필요가 없다
@@ -21,19 +23,28 @@ export default new Vuex.Store({
     SET_TOKEN(state, token) {
       state.authToken = token
       cookies.set('auth-token', token)
+      console.log('쿠키설정성공')
+    },
+    set_userInfo(state, info){
+      state.userInfo = info
+    },
+    set_videoId(state, videoId){
+      console.log('id세팅', videoId)
+      state.videoId = videoId
     },
   },
   actions: {
-    postAuthData({ commit }, info) {
-      console.log(SERVER.URL + info.location, 'info.data',info.data)
-      console.log('test')
-      axios.post(SERVER.URL + info.location, info.data)
-        .then(res => {
-          commit('SET_TOKEN', res.data.key)
-          // router.push({ name: 'About' })
-          // router.go()
-        })
-        .catch(err => console.log(err.response.data))
+    async postAuthData({ commit }, info) {
+      const res = await axios.post(SERVER.URL + info.location, info.data)
+      commit('SET_TOKEN', res.data.key)
+      return res
+        // .then(res => {
+        //   console.log('로그인성공')
+        //   commit('SET_TOKEN', res.data.key)
+        //   return res.data.key
+        // })
+        // .catch(err => console.log(err.response.data))
+        // // return cookies.get('auth-token')
     },
     login({ dispatch }, loginData) {
       // console.log(this.getters.isLoggedIn, '로그인확인')
@@ -41,7 +52,7 @@ export default new Vuex.Store({
         data: loginData,
         location: SERVER.ROUTES.login,
       }
-      dispatch('postAuthData', info)
+       return dispatch('postAuthData', info)
     },
     signup({ dispatch }, signupData) {
       const info = {
@@ -50,6 +61,39 @@ export default new Vuex.Store({
       }
       dispatch('postAuthData', info)
     },
+    async logout({ getters, commit }) {
+      const res = await axios.post(SERVER.URL + SERVER.ROUTES.logout, null, getters.config)
+      console.log(res)
+      commit('SET_TOKEN', null)  // state 에서도 삭제
+      cookies.remove('auth-token')  // cookie 에서는 삭제
+      this.state.userInfo = null // 유저 정보 삭제
+    },
+    async authInfo({commit }, k) {
+      const resKey = await k
+      console.log(resKey, 'res')
+      const customHeader= {headers: {Authorization: `Token ${resKey.data.key}`} }
+      console.log(customHeader, '커스텀헤더')
+      const res = await axios.get(SERVER.URL + SERVER.ROUTES.authInfo, customHeader)
+      console.log(res)
+      commit('set_userInfo', res.data)
+    },
+    async getVideoId({commit}) {
+      // const movieRes = await axios.get(SERVER.URL + SERVER.ROUTES.getTrailer)
+      const youtubeRes = await axios.get(GOOGLE.URL + GOOGLE.ROUTES.search, {
+      params: {
+        key: GOOGLE.KEY,
+        part: 'snippet',
+        type: 'video',
+        // q: movieRes.data.title,
+        q: '타이타닉'+'trailer',
+        maxResults: 1,
+      }})
+      console.log(youtubeRes, '유튜브결과')
+      commit('set_videoId', youtubeRes.data.items[0].id.videoId)
+    }
+    
+
+    
   },
   modules: {
   },

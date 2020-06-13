@@ -7,8 +7,6 @@
       <v-toolbar-title>로고넣을곳</v-toolbar-title>
       <v-icon @click="drawer = true">mdi-account</v-icon>
       <!-- <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon> -->
-      l1I|
-
     </v-app-bar>
 
     <v-navigation-drawer
@@ -20,8 +18,15 @@
       class="container"
     >
       <div v-if="isLoggedIn">
-        로그인댐
-        이제 여기에 프로필 만들거
+        <div v-if="!!userInfo">
+          로그인댐
+          <!-- <button @click="authInfo">정보가져와</button> -->
+          <button @click="logout">로그아웃</button>
+          <p>이름 : {{userInfo.name}}</p>
+          <p>나이 : {{userInfo.age}}</p>
+          <p>성별 : {{userInfo.sex===0?'남자':'여자'}}</p>
+          <!-- <p>{{userInfo}}</p> -->
+        </div>
       </div>
       <div v-else>
         <AccountForm/>
@@ -32,8 +37,8 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
 import AccountForm from './AccountForm'
+import { mapActions } from 'vuex'
 
 export default {
   name: "Account",
@@ -49,8 +54,19 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isLoggedIn
+    },
+    userInfo() {
+      return this.$store.state.userInfo
     }
-  }
+  },
+  methods: {
+    ...mapActions(['logout']),
+    ...mapActions(['authInfo'])
+  },
+  // updated() {
+  //   if (this.isLoggedIn) this.authInfo()
+  // }
+
 }
 </script>
 

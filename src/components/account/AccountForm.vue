@@ -135,6 +135,7 @@ export default {
   methods: {
     ...mapActions(['signup']),
     ...mapActions(['login']),
+    ...mapActions(['authInfo']),
     validate () {
       this.$refs.form.validate()
     },
@@ -154,6 +155,7 @@ export default {
         sex: this.select==='남자'?0:1,
       }
       this.signup(signupData)
+      // this.authInfo()
     },
     runLogin () {
       // console.log(this.$cookies.isKey('auth-token'))
@@ -161,7 +163,9 @@ export default {
         email: this.email,
         password: this.password,
       }
-      this.login(loginData)
+      const k = this.login(loginData)
+
+      this.authInfo(k)
     },
     
   },

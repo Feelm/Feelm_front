@@ -1,14 +1,22 @@
 export default {
   URL: 'http://localhost:8000',
   ROUTES: {
-      signup: '/rest-auth/signup/',
-      
-      login: '/rest-auth/login/',
+    signup: '/rest-auth/signup/',
+    
+    login: '/rest-auth/login/',
 
-      logout: '/rest-auth/logout/',
+    logout: '/rest-auth/logout/',
 
-      // createArticle: '/articles/create/',
+    authInfo: '/rest-auth/user/',
 
-      // articleList: '/articles/',
+    getTrailer: '/movies/recent/',
+
+    getMovies: '/movies/',
+    
+    // getReviewRecent: '/reviews/'
+
+    // createArticle: '/articles/create/',
+
+    // articleList: '/articles/',
   }
 }
