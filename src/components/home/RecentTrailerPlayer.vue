@@ -1,7 +1,7 @@
 <template>
   <div class="iframebox d-block" v-if="$store.state.videoId">
     <iframe 
-        :src="videoURL" frameborder="0" 
+        :src="videoURL+'?autoplay=1&loop=1'" frameborder="0" 
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
         onload="doResize()" width="100%" height="100%"
         allowfullscreen

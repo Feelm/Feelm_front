@@ -8,8 +8,8 @@
         color="rgba(0, 0, 0, 0.8)"
       >
         <NavBar/>
-        <div class="container">
           <RecentTrailerPlayer/>
+        <div class="container">
           <br>
           <hr>
           <MovieList/>
