@@ -1,5 +1,5 @@
 <template>
-  <div class="iframebox" v-if="$store.state.videoId">
+  <div class="iframebox d-block" v-if="$store.state.videoId">
     <iframe 
         :src="videoURL" frameborder="0" 
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 

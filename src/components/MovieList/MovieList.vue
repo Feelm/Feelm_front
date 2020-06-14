@@ -3,7 +3,7 @@
     <!-- 상영, 개봉예정 -->
     <MovieCarousel v-if="true" :movies="upcomingMovies"/>
     <MovieCarousel v-else :movies="nowplayingMovies"/>
-    안뇽
+    
     <MovieCarousel :movies="latestMovies"/> 
     {{upcomingMovies}}
 

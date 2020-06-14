@@ -11,6 +11,7 @@
         <div class="container">
           <RecentTrailerPlayer/>
           <br>
+          <hr>
           <MovieList/>
         </div>
         <br>

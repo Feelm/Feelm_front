@@ -35,7 +35,8 @@ export default new Vuex.Store({
   },
   actions: {
     async postAuthData({ commit }, info) {
-      const res = await axios.post(SERVER.URL + info.location, info.data)
+      console.log(SERVER.URL + info.location, info.data)
+      const res = await axios.post(SERVER.URL + info.location)
       commit('SET_TOKEN', res.data.key)
       return res
         // .then(res => {
@@ -91,9 +92,6 @@ export default new Vuex.Store({
       // console.log(youtubeRes, '유튜브결과')
       commit('set_videoId', youtubeRes.data.items[0].id.videoId)
     }
-    
-
-    
   },
   modules: {
   },

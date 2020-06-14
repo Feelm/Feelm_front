@@ -1,12 +1,17 @@
 <template>
   <div>
     <v-app-bar
-      color="deep-purple"
+      color="secondary"
       dark
+      
     >
-      <v-toolbar-title>로고넣을곳</v-toolbar-title>
+      
+
+      <v-toolbar-title >로고넣을곳</v-toolbar-title>
+      <v-spacer></v-spacer>
       <v-icon @click="drawer = true">mdi-account</v-icon>
       <!-- <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon> -->
+      
     </v-app-bar>
 
     <v-navigation-drawer

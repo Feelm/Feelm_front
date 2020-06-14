@@ -151,7 +151,7 @@ export default {
         password1: this.password,
         password2: this.password2,
         name: this.name,
-        age: this.age,
+        age: Number(this.age),
         sex: this.select==='남자'?0:1,
       }
       this.signup(signupData)
