@@ -78,18 +78,19 @@ export default new Vuex.Store({
       // console.log(res)
       commit('set_userInfo', res.data)
     },
-    async getVideoId({commit}) {
+    async getVideoId({commit}, movie) {
+      console.log(movie, 111111111111)
       // const movieRes = await axios.get(SERVER.URL + SERVER.ROUTES.getTrailer)
       const youtubeRes = await axios.get(GOOGLE.URL + GOOGLE.ROUTES.search, {
       params: {
         key: GOOGLE.KEY,
         part: 'snippet',
         type: 'video',
-        // q: movieRes.data.title,
-        q: '타이타닉'+'trailer',
+        q: 'deadpool trailer',
+        // q: movie[0].title +'trailer',
         maxResults: 1,
       }})
-      // console.log(youtubeRes, '유튜브결과')
+      console.log(movie, '무비')
       commit('set_videoId', youtubeRes.data.items[0].id.videoId)
     }
   },

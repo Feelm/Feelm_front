@@ -7,16 +7,19 @@
         allowfullscreen
     ></iframe>
     <div class="backscreen">
-    <div class="row backscreenrow">
-        <div class="col-6"></div>
-        <div class="col-6"></div>
+    <div class="row align-items-center backscreenrow">
+        <div class="col-6 align-items-center">
+            <div class="title1">{{}}</div>
+        </div>
+        <div class="col-6">
+        </div>
     </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+// import { mapActions } from 'vuex'
 
 export default {
     name: "RecentTrailerPlayer",
@@ -27,7 +30,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getVideoId'])
+        // ...mapActions(['getVideoId'])
     },
     created() {
         this.getVideoId()
@@ -56,5 +59,10 @@ export default {
         position: relative;
         width: 100%;
         height: 100%;
+    }
+    .title1 {
+        text-align: center;
+        color: white;
+        font-size: 50px;    
     }
 </style>
