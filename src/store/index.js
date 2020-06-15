@@ -109,7 +109,7 @@ export default new Vuex.Store({
           body: {
             pointed_movie: `${inputData.id}`,
             // pointing_user: this.state.userInfo.id,
-            pointing_user: '1',
+            pointing_user: `${this.state.userInfo.id}`,
             star_point: `${inputData.rating}`,
           }
         },
