@@ -8,13 +8,12 @@
 
       <v-carousel-item v-for="movies in movieSet" :key="movies[0].id" class="">
         <div class="netflix">
-          <a v-for="movie in movies" :key="movie.id" class="item">
+          <a v-for="movie in movies" :key="movie.id" class="m-auto">
+            <!-- <div class="img">
             <img :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="" class="">
-            <div>
-              <star-rating>
-              </star-rating>
-            </div>
-            <!-- <CarouselItem :movie="movie" /> -->
+            <star-rating :rating="movie.vote_average/2" :round-start-rating="false"></star-rating>
+            </div> -->
+            <CarouselItem :movie="movie" />
           </a>
         </div>
 
@@ -24,7 +23,7 @@
 </template>
 
 <script>
-// import CarouselItem from './CarouselItem.vue'
+import CarouselItem from './CarouselItem.vue'
 
 export default {
   name: "MovieCarousel",
@@ -32,7 +31,7 @@ export default {
     'movies',
   ],
   components: {
-    // CarouselItem,
+    CarouselItem,
   },
   data() {
     return {
@@ -63,12 +62,12 @@ export default {
 
 .container:focus-within .item,
 .container:hover .item {
-  transform: translateX(-25%);
+  transform: translateX(-12.5%);
 }
 
 .item:focus ~ .item,
 .item:hover ~ .item {
-  transform: translateX(25%);
+  transform: translateX(12.5%);
 }
 
 .item:focus ~ .item img,

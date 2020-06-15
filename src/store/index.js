@@ -36,7 +36,7 @@ export default new Vuex.Store({
   actions: {
     async postAuthData({ commit }, info) {
       console.log(SERVER.URL + info.location, info.data)
-      const res = await axios.post(SERVER.URL + info.location)
+      const res = await axios.post(SERVER.URL + info.location, info.data)
       commit('SET_TOKEN', res.data.key)
       return res
         // .then(res => {
