@@ -24,6 +24,8 @@
     >
       <div v-if="isLoggedIn">
         <button @click="logout">로그아웃</button>
+        <button @click="test">test</button>
+        
         <div v-if="!!userInfo">
           로그인댐
           <!-- <button @click="authInfo">정보가져와</button> -->
@@ -66,7 +68,8 @@ export default {
   },
   methods: {
     ...mapActions(['logout']),
-    ...mapActions(['authInfo'])
+    ...mapActions(['authInfo']),
+    ...mapActions(['test'])
   },
   // updated() {
   //   if (this.isLoggedIn) this.authInfo()

@@ -27,6 +27,7 @@ export default new Vuex.Store({
     },
     set_userInfo(state, info){
       state.userInfo = info
+      console.log('userinfo 저장')
     },
     set_videoId(state, videoId){
       // console.log('id세팅', videoId)
@@ -34,31 +35,35 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async postAuthData({ commit }, info) {
-      console.log(SERVER.URL + info.location, info.data)
-      const res = await axios.post(SERVER.URL + info.location, info.data)
-      commit('SET_TOKEN', res.data.key)
-      return res
-        // .then(res => {
-        //   console.log('로그인성공')
-        //   commit('SET_TOKEN', res.data.key)
-        //   return res.data.key
-        // })
-        // .catch(err => console.log(err.response.data))
-        // // return cookies.get('auth-token')
+    postAuthData({ commit }, info) {
+      console.log(SERVER.URL + info.location, info.data,)
+      axios.post(SERVER.URL + info.location, info.data,).then(res=>{
+        commit('SET_TOKEN', res.data.key)
+        console.log('post auth 작업 성공')
+      }).catch(err=>console.log(err.response))
+
+    },
+    postData({ commit },info) {
+      console.log(SERVER.URL + info.location, info.data, info.header)
+      axios.post(SERVER.URL + info.location, info.data, info.header).then(res=>{
+        console.log(res,'post data 작업 성공')
+        commit()
+      }).catch(err=>console.log(err.response))
     },
     login({ dispatch }, loginData) {
       // console.log(this.getters.isLoggedIn, '로그인확인')
       const info = {
         data: loginData,
         location: SERVER.ROUTES.login,
+        header: null,
       }
        return dispatch('postAuthData', info)
     },
     signup({ dispatch }, signupData) {
       const info = {
         data: signupData,
-        location: SERVER.ROUTES.signup
+        location: SERVER.ROUTES.signup,
+        header: null,
       }
       dispatch('postAuthData', info)
     },
@@ -69,14 +74,18 @@ export default new Vuex.Store({
       cookies.remove('auth-token')  // cookie 에서는 삭제
       this.state.userInfo = null // 유저 정보 삭제
     },
-    async authInfo({commit }, k) {
-      const resKey = await k
+    // async authInfo({commit }, k) {
+    //   const resKey = await k
+    authInfo({ commit }) {
+      // token = cookies.get('auth-token')
       // console.log(resKey, 'res')
-      const customHeader= {headers: {Authorization: `Token ${resKey.data.key}`} }
+      const customHeader= {headers: {Authorization: `Token ${cookies.get('auth-token')}`} }
       // console.log(customHeader, '커스텀헤더')
-      const res = await axios.get(SERVER.URL + SERVER.ROUTES.authInfo, customHeader)
-      // console.log(res)
-      commit('set_userInfo', res.data)
+      console.log(SERVER.URL + SERVER.ROUTES.authInfo, customHeader)
+      axios.get(SERVER.URL + SERVER.ROUTES.authInfo, customHeader).then(res=>{
+        commit('set_userInfo', res.data)
+        console.log(res, '유저정보')
+      }).catch(err=>console.log(err.response,'유저정보실패이유'))
     },
     async getVideoId({commit}, movie) {
       console.log(movie, 111111111111)
@@ -93,14 +102,26 @@ export default new Vuex.Store({
       console.log(movie, '무비')
       commit('set_videoId', youtubeRes.data.items[0].id.videoId)
     },
-    postPoint({ dispatch }, rating, movieId) {
-      // 여기고쳐!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    postPoint({ dispatch }, inputData) {
+      // 여기고쳐!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! // 다고침
       const info = {
-        data: pointData,
-        location: SERVER.ROUTES.signup
+        data: {
+          body: {
+            pointed_movie: `${inputData.id}`,
+            // pointing_user: this.state.userInfo.id,
+            pointing_user: '1',
+            star_point: `${inputData.rating}`,
+          }
+        },
+        location: SERVER.ROUTES.getMovies+inputData.id+SERVER.ROUTES.postPoint,
+        header: {headers: {Authorization: `Token ${cookies.get('auth-token')}`} },
       }
-      dispatch('postAuthData', info)
+      dispatch('postData', info)
     },
+    test({dispatch}) {
+      console.log(this.state.userInfo)
+      return dispatch('authInfo')
+    }
   },
   modules: {
   },

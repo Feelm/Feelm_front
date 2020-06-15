@@ -1,9 +1,9 @@
 <template>
   <div class="item">
     <img :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="" class="itemimg">
-    <div class="starbox">
+    <div class="starbox" @click="inputPoint">
       <h5>{{movie.title}}</h5>
-      <star-rating :rating="movie.vote_average/2" v-model="rating" :round-start-rating="false" :star-size="20" class="star" @click="inputPoint"></star-rating>
+      <star-rating :rating="movie.vote_average/2" v-model="rating" :round-start-rating="false" :star-size="20" class="star"></star-rating>
     </div>
   </div>
 </template>
@@ -14,9 +14,9 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'CarouselItem',
-  props: [
-    'movie',
-  ],
+  props: {
+    movie: Object
+  },
   data() {
     return {
       rating: this.movie.vote_average/2
@@ -25,7 +25,11 @@ export default {
   methods: {
     ...mapActions(['postPoint']),
     inputPoint() {
-      this.postPoint(this.rating, this.movie.id)
+      const inputData = {
+        rating: this.rating,
+        id: this.movie.id,
+      }
+      this.postPoint(inputData)
     }
   }
 }
