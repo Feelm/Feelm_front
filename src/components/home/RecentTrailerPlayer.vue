@@ -7,13 +7,13 @@
         allowfullscreen
     ></iframe>
     <div class="backscreen">
-    <div class="row align-items-center backscreenrow">
-        <div class="col-6 align-items-center">
-            <div class="title1">{{}}</div>
+        <div class="row align-items-center backscreenrow">
+            <div class="col-6 align-items-center">
+                <div class="title1">{{}}</div>
+            </div>
+            <div class="col-6">
+            </div>
         </div>
-        <div class="col-6">
-        </div>
-    </div>
     </div>
   </div>
 </template>
