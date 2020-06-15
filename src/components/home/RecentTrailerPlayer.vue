@@ -7,11 +7,20 @@
         allowfullscreen
     ></iframe>
     <div class="backscreen">
+        
         <div class="row align-items-center backscreenrow">
             <div class="col-6 align-items-center">
-                <div class="title1">{{}}</div>
+                <div class="title1">Movie Title
+                    <br><br>
+                </div>
+                <!-- <div class="content1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> -->
             </div>
-            <div class="col-6">
+            <div class="col-6 align-items-center">
+                <div class="content1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                       Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
             </div>
         </div>
     </div>
@@ -63,6 +72,12 @@ export default {
     .title1 {
         text-align: center;
         color: white;
-        font-size: 50px;    
+        font-size: 100px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .content1 {
+        color: rgba(200,200,200);
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
     }
 </style>

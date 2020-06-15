@@ -2,17 +2,32 @@
   <div class="item">
     <img :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="" class="itemimg">
     <div class="starbox">
-      <star-rating :rating="movie.vote_average/2" :round-start-rating="false" :star-size="20" class="star"></star-rating>
+      <h5>{{movie.title}}</h5>
+      <star-rating :rating="movie.vote_average/2" v-model="rating" :round-start-rating="false" :star-size="20" class="star" @click="inputPoint"></star-rating>
     </div>
   </div>
 </template>
 
 <script>
+
+import { mapActions } from 'vuex'
+
 export default {
   name: 'CarouselItem',
   props: [
     'movie',
   ],
+  data() {
+    return {
+      rating: this.movie.vote_average/2
+    }
+  },
+  methods: {
+    ...mapActions(['postPoint']),
+    inputPoint() {
+      this.postPoint(this.rating, this.movie.id)
+    }
+  }
 }
 </script>
 
@@ -57,17 +72,16 @@ body {
   transition: display 500ms;
 }
 
-/* .item:focus .itemimg,
+.item:focus .itemimg,
 .item:hover .itemimg {
-  display: none;
-  transition-delay: 2s;
-} */
+  opacity: 0.2;
+}
 
 .starbox {
   display: none;
   position: absolute;
   left: auto;
-  top: 95%;
+  top: 70%;
   left: 50%;
   transform: translate( -50%, -50% );
   /* max-width: 100%;

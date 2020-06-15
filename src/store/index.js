@@ -92,7 +92,15 @@ export default new Vuex.Store({
       }})
       console.log(movie, '무비')
       commit('set_videoId', youtubeRes.data.items[0].id.videoId)
-    }
+    },
+    postPoint({ dispatch }, rating, movieId) {
+      // 여기고쳐!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      const info = {
+        data: pointData,
+        location: SERVER.ROUTES.signup
+      }
+      dispatch('postAuthData', info)
+    },
   },
   modules: {
   },
