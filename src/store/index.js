@@ -87,6 +87,7 @@ export default new Vuex.Store({
       commit('SET_TOKEN', null)  // state 에서도 삭제
       cookies.remove('auth-token')  // cookie 에서는 삭제
       this.state.userInfo = null // 유저 정보 삭제
+      location.reload()
     },
     // async authInfo({commit }, k) {
     //   const resKey = await k
