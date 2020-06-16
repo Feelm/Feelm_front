@@ -41,6 +41,7 @@ export default new Vuex.Store({
       console.log(SERVER.URL + info.location, info.data,)
       axios.post(SERVER.URL + info.location, info.data,).then(res=>{
         commit('SET_TOKEN', res.data.key)
+
         console.log('post auth 작업 성공')
       }).catch(err=>console.log(err.response))
 
@@ -59,7 +60,7 @@ export default new Vuex.Store({
         location: SERVER.ROUTES.login,
         header: null,
       }
-       return dispatch('postAuthData', info)
+      return dispatch('postAuthData', info)
     },
     signup({ dispatch }, signupData) {
       const info = {
@@ -128,9 +129,9 @@ export default new Vuex.Store({
       const info = {
         data: {
           body: {
-            pointed_movie: `${inputData.id}`,
+            // pointed_movie: `${inputData.id}`,
             // pointing_user: this.state.userInfo.id,
-            pointing_user: `${this.state.userInfo.id}`,
+            // pointing_user: `${this.state.userInfo.id}`,
             star_point: `${inputData.rating}`,
           }
         },

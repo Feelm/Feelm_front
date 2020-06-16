@@ -50,6 +50,7 @@ export default {
       this.latestMovies = res3.data
 
       const header =  {headers: {Authorization: `Token ${this.$cookies.get('auth-token')}`} }
+      console.log(header)
       const res4 = await axios.get(SERVER.URL + SERVER.ROUTES.getMovies + 'recommend/', header)
       this.recommendedMovies = res4.data
     },
