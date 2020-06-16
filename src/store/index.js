@@ -115,6 +115,7 @@ export default new Vuex.Store({
             q: res1.data.title +'trailer',
             maxResults: 1,
         }}).then(res2=>{
+          console.log(res2)
           const res = {
             id: res2.data.items[0].id.videoId,
             movieData: res1.data
@@ -127,15 +128,13 @@ export default new Vuex.Store({
     postPoint({ dispatch }, inputData) {
       const info = {
         data: {
-          
           star_point: `${inputData.rating}`,
           // star_point: inputData.rating,
-          
         },
         location: SERVER.ROUTES.getMovies+inputData.id+SERVER.ROUTES.postPoint,
         header: {headers: {Authorization: `Token ${cookies.get('auth-token')}`} },
       }
-      console.log(info.data.body.star_point,'넣었어!!!')
+      console.log(info.data.star_point,'넣었어!!!')
       dispatch('postData', info)
     },
     test({dispatch}) {

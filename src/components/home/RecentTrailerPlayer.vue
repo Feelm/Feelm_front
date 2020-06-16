@@ -18,7 +18,6 @@
                     {{this.$store.state.videoData.overview}}
                     <!-- {{this.$store.state.videoData.id}} -->
 
-
                 </div>
                 <!-- <div class="content1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> -->
             </div>
