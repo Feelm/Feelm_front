@@ -17,6 +17,7 @@ Vue.use(VueRouter)
     name: 'MovieDetail',
     component: MovieDetail,
   },
+
 ]
 
 const router = new VueRouter({

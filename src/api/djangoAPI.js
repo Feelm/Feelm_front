@@ -13,7 +13,9 @@ export default {
 
     getMovies: '/movies/',
 
-    postPoint: '/point/'
+    postPoint: '/point/',
+
+    reviews: '/reviews/',
     
     // getReviewRecent: '/reviews/'
 
