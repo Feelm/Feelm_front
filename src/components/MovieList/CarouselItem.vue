@@ -32,7 +32,7 @@ export default {
       this.postPoint(inputData)
     },
     movieDetail(){
-      this.$router.push({name:"MovieDetail"})
+      this.$router.push({name:"MovieDetail"}, this.movie)
     }
   }
 }

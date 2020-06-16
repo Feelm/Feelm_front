@@ -2,8 +2,8 @@
   <div class="movielist">
     <!-- 상영, 개봉예정 -->
     <h1>추천 영화</h1>
-    <!-- <MovieCarousel :movies="recommendedMovies"/>  -->
-    <!-- <h1 style="">현재 상영 영화</h1> -->
+    <MovieCarousel :movies="recommendedMovies"/> 
+    <h1 style="">현재 상영 영화</h1>
     <MovieCarousel :movies="nowplayingMovies"/>
     <h1>개봉 예정 영화</h1>
     <MovieCarousel :movies="upcomingMovies"/>

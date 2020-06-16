@@ -46,7 +46,7 @@ export default new Vuex.Store({
       }).catch(err=>console.log(err.response))
 
     },
-    postData({ commit },info) {
+    postData({ commit }, info) {
       console.log(SERVER.URL + info.location, info.data, info.header)
       axios.post(SERVER.URL + info.location, info.data, info.header).then(res=>{
         console.log(res,'post data 작업 성공')
@@ -125,17 +125,13 @@ export default new Vuex.Store({
       }).catch(err=>console.log(err))
     },
     postPoint({ dispatch }, inputData) {
-      // 여기고쳐!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! // 다고침
       const info = {
         data: {
-          body: {
-            // pointed_movie: `${inputData.id}`,
-            // pointing_user: this.state.userInfo.id,
-            // pointing_user: `${this.state.userInfo.id}`,
-            star_point: `${inputData.rating}`,
-          }
+          
+          star_point: `${inputData.rating}`,
+          // star_point: inputData.rating,
+          
         },
-        
         location: SERVER.ROUTES.getMovies+inputData.id+SERVER.ROUTES.postPoint,
         header: {headers: {Authorization: `Token ${cookies.get('auth-token')}`} },
       }

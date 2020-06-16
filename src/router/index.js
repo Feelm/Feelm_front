@@ -13,9 +13,10 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/movie',
+    path: '/movie/:id',
     name: 'MovieDetail',
-    component: About
+    component: About,
+    props: true,
   },
   // {
   //   path: '/detail',

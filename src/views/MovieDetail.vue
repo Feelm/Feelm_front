@@ -1,5 +1,16 @@
 <template>
   <div class="detail">
     <h1>This is an detail page</h1>
-  </div>
+    {{this.movie}}
+  </div>  
 </template>
+
+<script>
+export default {
+  name: "MovieDetail",
+}
+</script>
+
+<style>
+
+</style>
