@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div class="movielist">
     <!-- 상영, 개봉예정 -->
-    <h1>현재 상영 영화</h1>
+    <h1 style="">현재 상영 영화</h1>
     <MovieCarousel :movies="nowplayingMovies"/>
     <h1>개봉 예정 영화</h1>
     <MovieCarousel :movies="upcomingMovies"/>
     <h1>최근 개봉 영화</h1>
     <MovieCarousel :movies="latestMovies"/> 
-    {{upcomingMovies}}
+    <h1>추천 영화</h1>
+    <MovieCarousel :movies="recommendedMovies"/> 
+    {{recommendedMovies}}
 
     <!-- 추천, 최신작 -->
 
@@ -32,7 +34,7 @@ export default {
       upcomingMovies: null,
       nowplayingMovies: null,
       latestMovies: null,
-      // recommendedMovies: null,
+      recommendedMovies: null,
     }
   },
   methods: {
@@ -46,9 +48,10 @@ export default {
       this.nowplayingMovies = res2.data
       const res3 = await axios.get(SERVER.URL + SERVER.ROUTES.getMovies + 'recent/')
       this.latestMovies = res3.data
-      
-      // const res4 = await axios.get(SERVER.URL + SERVER.ROUTES.getMovies + 'recommended/' + this.$store.userInfo.id)
-      // this.recommendedMovies = res4.data
+
+      const header =  {headers: {Authorization: `Token ${this.$cookies.get('auth-token')}`} }
+      const res4 = await axios.get(SERVER.URL + SERVER.ROUTES.getMovies + 'recommend/', header)
+      this.recommendedMovies = res4.data
     },
   },
   mounted() {
@@ -58,5 +61,7 @@ export default {
 </script>
 
 <style>
-
+.movielist h1{
+  color: rgb(220,220,200,1)
+}
 </style>

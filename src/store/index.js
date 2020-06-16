@@ -13,6 +13,7 @@ export default new Vuex.Store({
     authToken: cookies.get('auth-token'),
     userInfo: null,
     videoId: null,
+    videoData: null,
   },
   getters: {
     // cookies.isKey('auth-token')에서 변경 => 토큰 변경상황마다 일일히 실행해줄 필요가 없다
@@ -29,9 +30,10 @@ export default new Vuex.Store({
       state.userInfo = info
       console.log('userinfo 저장')
     },
-    set_videoId(state, videoId){
-      // console.log('id세팅', videoId)
-      state.videoId = videoId
+    set_video(state, res){
+      console.log('트레일러세팅', res)
+      state.videoId = res.id
+      state.videoData = res.movieData
     },
   },
   actions: {
@@ -87,20 +89,39 @@ export default new Vuex.Store({
         console.log(res, '유저정보')
       }).catch(err=>console.log(err.response,'유저정보실패이유'))
     },
-    async getVideoId({commit}, movie) {
-      console.log(movie, 111111111111)
+    async getVideoId({commit}) {
+      console.log(111111111111)
       // const movieRes = await axios.get(SERVER.URL + SERVER.ROUTES.getTrailer)
-      const youtubeRes = await axios.get(GOOGLE.URL + GOOGLE.ROUTES.search, {
-      params: {
-        key: GOOGLE.KEY,
-        part: 'snippet',
-        type: 'video',
-        q: 'deadpool trailer',
-        // q: movie[0].title +'trailer',
-        maxResults: 1,
-      }})
-      console.log(movie, '무비')
-      commit('set_videoId', youtubeRes.data.items[0].id.videoId)
+      // console.log(SERVER.URL + SERVER.ROUTES.getTrailer, movieRes)
+      // const youtubeRes = await axios.get(GOOGLE.URL + GOOGLE.ROUTES.search, {
+      // params: {
+      //   key: GOOGLE.KEY,
+      //   part: 'snippet',
+      //   type: 'video',
+      //   // q: 'deadpool trailer',
+      //   q: movieRes.data.title +'trailer',
+      //   maxResults: 1,
+      // }})
+      // commit('set_video', youtubeRes.data.items[0].id.videoId, movieRes.data)
+      axios.get(SERVER.URL + SERVER.ROUTES.getTrailer).then(res1=>{
+        console.log(SERVER.URL + SERVER.ROUTES.getTrailer, res1)
+        axios.get(GOOGLE.URL + GOOGLE.ROUTES.search, {
+          params: {
+            key: GOOGLE.KEY,
+            part: 'snippet',
+            type: 'video',
+            // q: 'deadpool trailer',
+            q: res1.data.title +'trailer',
+            maxResults: 1,
+        }}).then(res2=>{
+          const res = {
+            id: res2.data.items[0].id.videoId,
+            movieData: res1.data
+          }
+          commit('set_video', res)
+        }).catch(err=>console.log(err))
+        // console.log(movie, '무비')
+      }).catch(err=>console.log(err))
     },
     postPoint({ dispatch }, inputData) {
       // 여기고쳐!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! // 다고침

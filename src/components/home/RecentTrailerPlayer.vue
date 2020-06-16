@@ -9,18 +9,23 @@
     <div class="backscreen">
         
         <div class="row align-items-center backscreenrow">
-            <div class="col-6 align-items-center">
-                <div class="title1">Movie Title
-                    <br><br>
+            <div class="col-6 align-items-center leftside">
+                <br>
+                <div class="title1">
+                    {{this.$store.state.videoData.title}}
+                </div>
+                <div class="content1 m-5">
+                    {{this.$store.state.videoData.overview}}
+                    <!-- {{this.$store.state.videoData.id}} -->
+
+
                 </div>
                 <!-- <div class="content1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> -->
             </div>
             <div class="col-6 align-items-center">
                 <div class="content1">
                     <br><br><br><br><br><br><br>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      
+                    <!-- {{this.$store.state.videoData.overview}} -->
                 </div>
             </div>
         </div>
@@ -80,5 +85,8 @@ export default {
         color: rgba(200,200,200,0.5);
         font-size: 25px;
         font-family: Arial, Helvetica, sans-serif;
+    }
+    .leftside {
+        width: 200px;
     }
 </style>

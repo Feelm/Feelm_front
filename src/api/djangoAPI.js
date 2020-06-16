@@ -9,7 +9,7 @@ export default {
 
     authInfo: '/rest-auth/user/',
 
-    getTrailer: '/movies/recent/',
+    getTrailer: '/movies/latest/',
 
     getMovies: '/movies/',
 

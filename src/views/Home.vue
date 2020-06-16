@@ -13,6 +13,7 @@
           <br>
           <hr>
           <MovieList/>
+          <h1 class="white">여기 footer 넣을거에요</h1>
         </div>
         <br>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
