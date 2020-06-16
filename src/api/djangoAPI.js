@@ -13,12 +13,18 @@ export default {
 
     getMovies: '/movies/',
 
-    postPoint: '/point/'
+    postPoint: '/point/',
     
     // getReviewRecent: '/reviews/'
 
     // createArticle: '/articles/create/',
 
     // articleList: '/articles/',
+
+    boards : '/boards/',
+
+    requests : 'requests/',
+
+    free : 'free/',
   }
 }

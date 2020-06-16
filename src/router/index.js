@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MovieDetail from '../views/MovieDetail.vue'
-
+import Board from '../views/Board.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +16,11 @@ Vue.use(VueRouter)
     path: '/movie/:movieId',
     name: 'MovieDetail',
     component: MovieDetail,
+  },
+  {
+    path: '/board/:boardType',
+    name: 'board',
+    component: Board,
   },
 ]
 
