@@ -135,9 +135,11 @@ export default new Vuex.Store({
             star_point: `${inputData.rating}`,
           }
         },
+        
         location: SERVER.ROUTES.getMovies+inputData.id+SERVER.ROUTES.postPoint,
         header: {headers: {Authorization: `Token ${cookies.get('auth-token')}`} },
       }
+      console.log(info.data.body.star_point,'넣었어!!!')
       dispatch('postData', info)
     },
     test({dispatch}) {

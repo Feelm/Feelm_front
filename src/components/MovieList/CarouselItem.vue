@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <img :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="" class="itemimg">
+    <img :src="'https://image.tmdb.org/t/p/w185' + movie.poster_path" alt="" class="itemimg" @click="movieDetail">
     <div class="starbox" @click="inputPoint">
       <h5>{{movie.title}}</h5>
       <star-rating :rating="movie.vote_average/2" v-model="rating" :round-start-rating="false" :star-size="20" class="star"></star-rating>
@@ -19,17 +19,20 @@ export default {
   },
   data() {
     return {
-      rating: this.movie.vote_average/2
+      rating: this.movie.star/2
     }
   },
   methods: {
     ...mapActions(['postPoint']),
     inputPoint() {
       const inputData = {
-        rating: this.rating,
+        rating: (this.rating*2),
         id: this.movie.id,
       }
       this.postPoint(inputData)
+    },
+    movieDetail(){
+      this.$router.push({name:"MovieDetail"})
     }
   }
 }

@@ -8,7 +8,8 @@
         color="rgba(0, 0, 0, 0.8)"
       >
         <NavBar/>
-          <RecentTrailerPlayer/>
+        <div style="background-color:black;color:black"><br/><br/><br/></div>
+        <RecentTrailerPlayer/>
         <div class="container">
           <br>
           <hr>

@@ -78,12 +78,12 @@ export default {
     .title1 {
         text-align: center;
         color: white;
-        font-size: 100px;
-        font-family: 'Times New Roman', Times, serif;
+        font-size: 60px;
+        font-family: Arial, Helvetica, sans-serif;
     }
     .content1 {
         color: rgba(200,200,200,0.5);
-        font-size: 25px;
+        font-size: 20px;
         font-family: Arial, Helvetica, sans-serif;
     }
     .leftside {

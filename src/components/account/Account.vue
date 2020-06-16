@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-app-bar
-      color="secondary"
+      color="black"
       dark
-      
+      style="position: fixed; z-index: 100;"
     >
       
 
@@ -16,11 +16,13 @@
 
     <v-navigation-drawer
       v-model="drawer"
-      absolute
+      fixed
       temporary
       right
       width="400"
       class="container"
+      style="z-index: 101; background-color: rgb(51,51,51,1)"
+      
     >
       <div v-if="isLoggedIn">
         <button @click="logout">로그아웃</button>
