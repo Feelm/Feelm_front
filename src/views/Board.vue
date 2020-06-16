@@ -1,6 +1,5 @@
-
 <template>
-  <div class="home">
+  <div class="">
     <v-app id="inspire">
       <v-card
         class="mx-auto overflow-hidden main"
@@ -10,15 +9,10 @@
       >
         <NavBar/>
         <br><br><br>
-        <img :src="'https://image.tmdb.org/t/p/original' + movie.poster_path" alt="">
-        <div style="color: white;" class="container">
-        {{movie}}
 
-        </div>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       </v-card>
     </v-app>
-    <!-- <img alt="Vue logo" src="@/assets/logo.png"> -->
   </div>
 </template>
 <script>
@@ -30,17 +24,6 @@ export default {
   components: {
     NavBar,
   },
-  // props: ['movie'],
-  data() {
-    return {
-      movie: null,
-    }
-  },
-  mounted() {
-    axios.get(SERVER.URL + SERVER.ROUTES.getMovies + `${this.$route.params.movieId}`).then(res=>{
-      this.movie = res.data
-    })
-  }
 }
 
 

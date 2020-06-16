@@ -5,6 +5,7 @@
     ref="form"
     v-model="valid"
     lazy-validation
+    color="success"
     
   >
   <!-- 로그인 폼 -->

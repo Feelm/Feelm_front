@@ -21,7 +21,7 @@
       right
       width="400"
       class="container"
-      style="z-index: 101; background-color: rgb(51,51,51,1)"
+      style="z-index: 101; background-color: rgb(101,101,101,1)"
       
     >
       <div v-if="isLoggedIn">

@@ -41,15 +41,26 @@ export default new Vuex.Store({
       console.log(SERVER.URL + info.location, info.data,)
       axios.post(SERVER.URL + info.location, info.data,).then(res=>{
         commit('SET_TOKEN', res.data.key)
-
-        console.log('post auth 작업 성공')
-      }).catch(err=>console.log(err.response))
-
+        const customHeader= {headers: {Authorization: `Token ${res.data.key}`} }
+        axios.get(SERVER.URL + SERVER.ROUTES.authInfo, customHeader)
+        .then(res=>{
+          commit('set_userInfo', res.data)
+          console.log('post auth 작업 성공')
+        }).catch(err=>console.log(err.response))
+      })
     },
+
     postData({ commit }, info) {
       console.log(SERVER.URL + info.location, info.data, info.header)
       axios.post(SERVER.URL + info.location, info.data, info.header).then(res=>{
         console.log(res,'post data 작업 성공')
+        commit()
+      }).catch(err=>console.log(err.response))
+    },
+    putData({ commit }, info) {
+      console.log(SERVER.URL + info.location, info.data, info.header)
+      axios.put(SERVER.URL + info.location, info.data, info.header).then(res=>{
+        console.log(res,'put data 작업 성공')
         commit()
       }).catch(err=>console.log(err.response))
     },
@@ -136,6 +147,18 @@ export default new Vuex.Store({
       }
       console.log(info.data.star_point,'넣었어!!!')
       dispatch('postData', info)
+    },
+    putPoint({ dispatch }, inputData) {
+      const info = {
+        data: {
+          star_point: `${inputData.rating}`,
+          // star_point: inputData.rating,
+        },
+        location: SERVER.ROUTES.getMovies+inputData.id+SERVER.ROUTES.postPoint,
+        header: {headers: {Authorization: `Token ${cookies.get('auth-token')}`} },
+      }
+      console.log(info.data.star_point,'넣었어!!!')
+      dispatch('putData', info)
     },
     test({dispatch}) {
       console.log(this.state.userInfo)

@@ -24,15 +24,25 @@ export default {
   },
   methods: {
     ...mapActions(['postPoint']),
+    ...mapActions(['putPoint']),
     inputPoint() {
       const inputData = {
         rating: (this.rating*2),
         id: this.movie.id,
       }
+      console.log(Number(this.$store.state.userInfo.id) , this.movie.pointing_users,"--------------------------")
+      const tmp1 = this.$store.state.userInfo.id
+      for (var tmp2 of this.movie.pointing_users){
+        if (tmp1 == tmp2 ){
+          this.putPoint(inputData)
+          return
+        }
+      }
       this.postPoint(inputData)
     },
     movieDetail(){
-      this.$router.push({name:"MovieDetail"}, this.movie)
+      // this.$router.push({name:"MovieDetail", movieId: this.movie.id})
+      this.$router.push(`/movie/${this.movie.id}/`)
     }
   }
 }
