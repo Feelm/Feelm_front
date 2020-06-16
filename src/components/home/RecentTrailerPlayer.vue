@@ -1,7 +1,7 @@
 <template>
   <div class="iframebox d-block" v-if="$store.state.videoId">
     <iframe 
-        :src="videoURL+'?autoplay=1&loop=1&fs=0&disablekb=1&modestbranding=1&showinfo=0&controls=0'" frameborder="0" 
+        :src="videoURL+`?autoplay=1&playlist=${this.$store.state.videoId}&loop=1&fs=0&disablekb=1&modestbranding=1&showinfo=0&controls=0`" frameborder="0" 
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
         onload="doResize()" width="100%" height="100%"
         allowfullscreen
@@ -16,10 +16,11 @@
                 <!-- <div class="content1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> -->
             </div>
             <div class="col-6 align-items-center">
-                <div class="content1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <div class="content1">
+                    <br><br><br><br><br><br><br>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                       Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      
                 </div>
             </div>
         </div>
@@ -61,7 +62,7 @@ export default {
         width: 100%;
         /* padding-bottom: 56.25%; */
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.4);
         
     }
     .backscreenrow{
@@ -76,8 +77,8 @@ export default {
         font-family: 'Times New Roman', Times, serif;
     }
     .content1 {
-        color: rgba(200,200,200);
-        font-size: 30px;
+        color: rgba(200,200,200,0.5);
+        font-size: 25px;
         font-family: Arial, Helvetica, sans-serif;
     }
 </style>

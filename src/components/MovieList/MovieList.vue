@@ -1,9 +1,11 @@
 <template>
   <div>
     <!-- 상영, 개봉예정 -->
-    <MovieCarousel v-if="true" :movies="nowplayingMovies"/>
-    <MovieCarousel v-else :movies="upcomingMovies"/>
-    
+    <h1>현재 상영 영화</h1>
+    <MovieCarousel :movies="nowplayingMovies"/>
+    <h1>개봉 예정 영화</h1>
+    <MovieCarousel :movies="upcomingMovies"/>
+    <h1>최근 개봉 영화</h1>
     <MovieCarousel :movies="latestMovies"/> 
     {{upcomingMovies}}
 

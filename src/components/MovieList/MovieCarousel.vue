@@ -14,6 +14,7 @@
             <star-rating :rating="movie.vote_average/2" :round-start-rating="false"></star-rating>
             </div> -->
             <CarouselItem :movie="movie" />
+            {{movies.star}}
           </a>
         </div>
 
