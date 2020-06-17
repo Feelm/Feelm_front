@@ -5,6 +5,7 @@ import MovieDetail from '../views/MovieDetail.vue'
 import Board from '../views/Board.vue'
 import FreeCreate from '../views/FreeCreate.vue'
 
+
 Vue.use(VueRouter)
 
   const routes = [
