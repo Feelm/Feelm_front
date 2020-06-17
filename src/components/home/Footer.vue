@@ -29,7 +29,7 @@
       <v-divider></v-divider>
 
       <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} — <strong>여기에다가 로고박아야지</strong>
+        {{ new Date().getFullYear() }} - <img src="@/assets/feelm/feelm_letter.png" style="height: 15px;" class="mb-1">
       </v-card-text>
     </v-card>
   </v-footer>

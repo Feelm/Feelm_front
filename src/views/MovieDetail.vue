@@ -86,7 +86,7 @@
                     <p style="display: block; text-align: right;">조회수 : {{this.modalReview.view_count}}</p>
                     <p style="color: rgb(0,0,0,0.5); text-align: right;">{{this.$moment(this.modalReview.updated_at).format("MMM Do")}}</p>
                   </div>
-                  <p class="m-2">{{this.modalReview.content}}</p>
+                  <p v-html="this.modalReview.content" class="m-2"></p>
                 </div>  
                 <div class="container">
                   <div v-for="comment in modalReview.comments" :key="comment.id">

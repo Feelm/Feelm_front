@@ -38,8 +38,8 @@
           </v-app-bar>
         </div>
         <div class="container">
-          <button @click="logout">로그아웃</button>
-          <button @click="test">test</button>
+          <!-- <button @click="signOut">회원탈퇴</button> -->
+          <!-- <button @click="test">test</button> -->
           
           <div v-if="!!userInfo">
             <!-- <button @click="authInfo">정보가져와</button> -->
@@ -67,6 +67,8 @@
 <script>
 import AccountForm from './AccountForm'
 import { mapActions } from 'vuex'
+import SERVER from '@/api/djangoAPI'
+import axios from 'axios'
 
 export default {
   name: "Account",
@@ -96,6 +98,16 @@ export default {
     ...mapActions(['test']),
     goHome() {
       this.$router.push('/')
+    },
+    signOut() {
+      console.log(this.userInfo.id,'idididididiidi')
+      const info = {
+        location: `/accounts/withdraw/${this.userInfo.id}/`,
+        header: {headers: {Authorization: `Token ${this.$cookies.get('auth-token')}`} },
+      }
+      axios.get(SERVER.URL + info.location, info.header).then(res=>{
+        this.logout(res)
+      }).catch(err=>console.log(err.response))
     }
   },
   // updated() {
