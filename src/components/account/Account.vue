@@ -7,7 +7,7 @@
     >
       
 
-      <v-toolbar-title >로고넣을곳</v-toolbar-title>
+      <v-toolbar-title ><img src="@/assets/feelm/feelm_logo_letter_shadow.png" alt="" class="mt-5 navbarLogo"  @click="goHome"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-icon @click="drawer = true">mdi-account</v-icon>
       <!-- <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon> -->
@@ -71,7 +71,10 @@ export default {
   methods: {
     ...mapActions(['logout']),
     ...mapActions(['authInfo']),
-    ...mapActions(['test'])
+    ...mapActions(['test']),
+    goHome() {
+      this.$router.push('/')
+    }
   },
   // updated() {
   //   if (this.isLoggedIn) this.authInfo()
@@ -81,5 +84,9 @@ export default {
 </script>
 
 <style>
+.navbarLogo {
+  height: 60px;
+  cursor: pointer;
+}
 
 </style>

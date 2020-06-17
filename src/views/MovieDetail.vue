@@ -42,14 +42,61 @@
             </div>
             <div class="container">
               <hr>
-              <p v-for="review in reviews" :key="review.id">
-                {{review}}
-              </p>
-              <br>
-              <br>
+              <div v-for="review in reviews" :key="review.id" class="row reviewlist" @click="reviewDetail(review)" type="button" data-toggle="modal" data-target="#reviewModal">
+                <div class="col-7">
+                  {{review.title}}
+                </div>
+                <div class="col-3">
+                  {{review.created_at}}
+                </div>
+                <div class="col-2">
+                  {{review.user}}
+                </div>
+                <hr>
+              </div>
             </div>
           </div>
+        <!-- 모달파트 시작 -->
+
+          
+          
+          <div v-if="modalReview != null" class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalLabel">{{this.modalReview.title}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body row">
+                  <div class="col-6">
+                    <p style="display: block">작성자 : {{this.modalReview.user}}</p>
+                    {{modalReview.like}}
+                    <i class="fas fa-heart" style="color: rgb(255,0,0,0.5); font-size:"></i>
+                  </div>
+                  <div class="col-6">
+                    <p style="display: block; text-align: right;">조회수 : {{this.modalReview.view_count}}</p>
+                    <p style="color: rgb(0,0,0,0.5); text-align: right;">{{this.modalReview.updated_at}}</p>
+                  </div>
+                  <p class="m-2">{{this.modalReview.content}}</p>
+                </div>
+                <div class="container">
+                  <div v-for="comment in modalReview.comments" :key="comment.id">
+                    <button class="btn-sm btn-danger d-inline">삭제</button>
+                    <p class="d-inline"> {{comment.user}} : {{comment.content}}</p>
+                  </div>
+                  <br>
+                  <input type="text" v-model="comment" style="border: solid; width: 60%; display: inline; margin: auto;">
+                  <button type="button" class="btn btn-primary text-white display: inline; margin: auto;" @click="createComment(this.modalReview)">댓글 작성하기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- 모달파트 끝 -->
+
         </div>
+
         <div class="floater"></div><div class="floater"></div><div class="floater"></div>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
           
@@ -73,6 +120,27 @@ export default {
     return {
       movie: null,
       reviews: null,
+      modalReview: null,
+      comment: null,
+    }
+  },
+  methods: {
+    reviewDetail(review) {
+      axios.get(SERVER.URL + `/movies/${this.movie.id}/reviews/${review.id}/`).then(res=>{
+        this.modalReview = res.data
+      })
+    },
+    createComment(review) {
+      const info = {
+        data: {
+          content: this.comment,
+        },
+        location: `/movies/${this.movie.id}/reviews/${review.id}/comments/`,
+        header: {headers: {Authorization: `Token ${this.$cookies.get('auth-token')}`} },
+      }
+      axios.post(SERVER.URL + info.location, info.data, info.geader).then(res=>{
+        console.log(res)
+      }).catch(err=>console.log(err.response))
     }
   },
   mounted() {
@@ -120,8 +188,12 @@ export default {
   font-size: 30px;
   font: bold;
 }
-
 .floater {
   height: 100px;
+}
+.reviewlist:hover {
+  background-color: gray;
+  cursor: pointer;
+  transition: background-color 1s;
 }
 </style>
