@@ -57,6 +57,7 @@ export default new Vuex.Store({
         commit()
       }).catch(err=>console.log(err.response))
     },
+
     putData({ commit }, info) {
       console.log(SERVER.URL + info.location, info.data, info.header)
       axios.put(SERVER.URL + info.location, info.data, info.header).then(res=>{
@@ -104,18 +105,6 @@ export default new Vuex.Store({
     },
     async getVideoId({commit}) {
       console.log(111111111111)
-      // const movieRes = await axios.get(SERVER.URL + SERVER.ROUTES.getTrailer)
-      // console.log(SERVER.URL + SERVER.ROUTES.getTrailer, movieRes)
-      // const youtubeRes = await axios.get(GOOGLE.URL + GOOGLE.ROUTES.search, {
-      // params: {
-      //   key: GOOGLE.KEY,
-      //   part: 'snippet',
-      //   type: 'video',
-      //   // q: 'deadpool trailer',
-      //   q: movieRes.data.title +'trailer',
-      //   maxResults: 1,
-      // }})
-      // commit('set_video', youtubeRes.data.items[0].id.videoId, movieRes.data)
       axios.get(SERVER.URL + SERVER.ROUTES.getTrailer).then(res1=>{
         console.log(SERVER.URL + SERVER.ROUTES.getTrailer, res1)
         axios.get(GOOGLE.URL + GOOGLE.ROUTES.search, {

@@ -66,7 +66,7 @@ export default {
         width: 100%;
         /* padding-bottom: 56.25%; */
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.3);
         
     }
     .backscreenrow{
