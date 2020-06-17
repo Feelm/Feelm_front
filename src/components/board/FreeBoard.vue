@@ -3,20 +3,22 @@
     <table class="table">
       <thead>
         <tr>
-          <th v-if="is_admin" scope="col" >check</th>
           <th scope="col">#</th>
-          <th scope="col">영화</th>
           <th scope="col">제목</th>
           <th scope="col">작성자</th>
+          <th scope="col">추천</th>
+          <th scope="col">조회수</th>
+          <th scope="col">작성시간</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="board in boardList" :key="board.id" :class="'tr_check_'+board.check">
-          <th v-if="is_admin" scope="row" ><input :class="'input'+board.id" @click="movieRequest(board.movie_id,board.id)" type="checkbox" :checked="board.check" :disabled='board.check'></th>
+        <tr v-for="board in boardList" :key="board.id">
           <th scope="row">{{board.id}}</th>
-          <td>{{board.movie_name}}</td>
           <td>{{board.title}}</td>
           <td>{{board.user}}</td>
+          <td>{{board.like}}</td>
+          <td>{{board.view_count}}</td>
+          <td>{{board.created_at}}</td>
         </tr>
       </tbody>
     </table>
@@ -28,7 +30,7 @@ import SERVER from '@/api/djangoAPI'
 import axios from 'axios'
 
 export default {
- name: 'ListBoard',
+ name: 'FreeBoard',
  props: {
    boardList: {
      type : Array,
@@ -46,8 +48,6 @@ export default {
             console.log(res2.data)
             const tr = document.querySelector(`.input${request_id}`)
             tr.parentElement.parentElement.className= `tr_check_true`
-            const checkBox = document.querySelector(`.input${request_id}`)
-            checkBox.setAttribute('disabled', 'true')
           })
           .catch( err2 => console.log(err2.response))
       })

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MovieDetail from '../views/MovieDetail.vue'
 import Board from '../views/Board.vue'
+import FreeCreate from '../views/FreeCreate.vue'
 
 Vue.use(VueRouter)
 
@@ -19,8 +20,13 @@ Vue.use(VueRouter)
   },
   {
     path: '/board/:boardType',
-    name: 'board',
+    name: 'Board',
     component: Board,
+  },
+  {
+    path: '/freeCreate',
+    name: 'FreeCreate',
+    component: FreeCreate,
   },
 ]
 
