@@ -2,7 +2,7 @@
   <div>
     <tr class='row' data-toggle="collapse" :data-target="'#collapse'+board.id" aria-expanded="false" aria-controls="collapseExample">
       <th class='col-1'>{{board.id}}</th>
-      <td class="col-5">{{board.title}}</td>
+      <td class="col-5 text-left">{{board.title}}</td>
       <td class="col-2">{{board.user}}</td>
       <td class="col-1">{{board.like}}</td>
       <td class="col-1">{{board.view_count}}</td>
@@ -17,6 +17,7 @@
           <p class="col-1 btn" @click="recommend()">👍</p>
           <p class="col-1 offset-10 btn" @click="deleteFree()">삭제</p>
         </div>
+        <br>
       </div>
     </div>
   </div>
