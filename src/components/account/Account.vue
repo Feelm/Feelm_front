@@ -51,8 +51,6 @@
             <p>성별 : {{userInfo.sex===0?'남자':'여자'}}</p>
             <p>e-mail : {{userInfo.email}}</p>
             
-            <p>{{userInfo.name}}님은 Feelm과  간 함께하고 계십니다</p>
-
             <!-- <p>{{userInfo}}<p/> -->
             <!-- <p>{{userInfo}}</p> -->
           </div>
