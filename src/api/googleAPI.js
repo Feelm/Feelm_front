@@ -1,6 +1,6 @@
 export default {
   URL: 'https://www.googleapis.com',
-  KEY: 'AIzaSyDNqPJP6z-cGw4l8moh8s9v7sZlLUZMlFM',
+  KEY: 'AIzaSyCzObxSDQA5e05xSmb5aQVV_VtBiFPcAfQ',
   ROUTES: {
 
     search: '/youtube/v3/search/',

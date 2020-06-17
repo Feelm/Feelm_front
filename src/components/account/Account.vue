@@ -9,8 +9,8 @@
 
       <v-toolbar-title ><img src="@/assets/feelm/feelm_logo_letter_shadow.png" alt="" class="mt-5 navbarLogo"  @click="goHome"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <span class="mr-5" @click="$router.push('/board/free/')">자유게시판</span>
-      <span class="mr-5" @click="$router.push('/board/request/')">요청게시판</span>
+      <span class="mr-5 boardHover" @click="$router.push('/board/free/')">자유게시판</span>
+      <span class="mr-5 boardHover" @click="$router.push('/board/request/')">요청게시판</span>
       <v-icon @click="drawer = true">mdi-account</v-icon>
       <!-- <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon> -->
       
@@ -123,6 +123,9 @@ export default {
   cursor: pointer;
 }
 .fa-sign-out-alt:hover {
+  cursor: pointer;
+}
+.boardHover {
   cursor: pointer;
 }
 </style>
