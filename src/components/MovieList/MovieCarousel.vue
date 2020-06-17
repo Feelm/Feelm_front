@@ -40,7 +40,9 @@ export default {
   },
   computed: {
     movieSet() {
-      var array = [this?.movies?.slice(0,5),this?.movies?.slice(5)];
+      var array 
+      if (this?.movies.length > 10) array = [this?.movies?.slice(0,5),this?.movies?.slice(5,10)]
+      else array = [this?.movies?.slice(0,5),this?.movies?.slice(5)]
       return array
     }
   }
