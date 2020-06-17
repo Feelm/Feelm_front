@@ -2,13 +2,13 @@
   <div>
     <table class="table">
       <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">제목</th>
-          <th scope="col">작성자</th>
-          <th scope="col">추천</th>
-          <th scope="col">조회수</th>
-          <th scope="col">작성시간</th>
+        <tr class='row'>
+          <th class="col-1">#</th>
+          <th class="col-5">제목</th>
+          <th class="col-2">작성자</th>
+          <th class="col-1">추천</th>
+          <th class="col-1">조회수</th>
+          <th class="col-2">작성시간</th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +29,7 @@ export default {
     }
   },
   methods: {
+    
   },
   components :{
     FreeBoardEach,
