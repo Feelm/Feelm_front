@@ -14,10 +14,9 @@
           <br>
           <hr>
           <MovieList/>
-          <h1 class="white">여기 footer 넣을거에요</h1>
         </div>
-        <br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="floater"></div>
+        <Footer/>
       </v-card>
     </v-app>
     <!-- <img alt="Vue logo" src="@/assets/logo.png"> -->
@@ -31,6 +30,7 @@
 import NavBar from '../components/home/NavBar.vue'
 import RecentTrailerPlayer from '@/components/home/RecentTrailerPlayer.vue'
 import MovieList from '@/components/MovieList/MovieList.vue'
+import Footer from '@/components/home/Footer.vue'
 // import HomeReviewList from '@/components/HomeReviewList.vue'
 // import HomeCommentList from '@/components/HomeCommentList.vue'
 
@@ -40,6 +40,7 @@ export default {
     NavBar,
     RecentTrailerPlayer,
     MovieList,
+    Footer,
     // ReviewList,
     // CommentList,
   },
@@ -53,5 +54,7 @@ export default {
 </script>
 
 <style>
-
+.floater {
+  height: 100px;
+}
 </style>

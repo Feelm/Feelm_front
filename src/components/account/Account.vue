@@ -20,24 +20,44 @@
       temporary
       right
       width="400"
-      class="container"
-      style="z-index: 101; background-color: rgb(101,101,101,1)"
+      class=""
+      style="z-index: 101; background-color: rgb(251,251,251,1)"
       
     >
       <div v-if="isLoggedIn">
-        <button @click="logout">로그아웃</button>
-        <button @click="test">test</button>
+        <div>
+          <v-app-bar color="grey darken-3 accent-4" dense dark>
+
+            <v-toolbar-title>My Profile</v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
         
-        <div v-if="!!userInfo">
-          로그인댐
-          <!-- <button @click="authInfo">정보가져와</button> -->
-          <p>이름 : {{userInfo.name}}</p>
-          <p>나이 : {{userInfo.age}}</p>
-          <p>성별 : {{userInfo.sex===0?'남자':'여자'}}</p>
-          <!-- <p>{{userInfo}}</p> -->
+          </v-app-bar>
+        </div>
+        <div class="container">
+          <button @click="logout">로그아웃</button>
+          <button @click="test">test</button>
+          
+          <div v-if="!!userInfo">
+            <!-- <button @click="authInfo">정보가져와</button> -->
+            <p style="font-size: 20px">{{userInfo.name}} 님 어서오세요 <i class="fas fa-sign-out-alt" style="color: rgb(255,50,50,1); font-size: 20px"></i></p>
+            <p>마지막 로그인 : {{$moment(this.userInfo.last_login, "YYYYMMDD").fromNow()}}<p/>
+            <p>나이 : {{userInfo.age}}</p>
+
+                    {{this.lastLogin}}
+
+            <p>성별 : {{userInfo.sex===0?'남자':'여자'}}</p>
+            <p>e-mail : {{userInfo.email}}</p>
+            
+            <p>{{userInfo.name}}님은 Feelm과  간 함께하고 계십니다</p>
+
+            <!-- <p>{{userInfo}}<p/> -->
+            <!-- <p>{{userInfo}}</p> -->
+          </div>
         </div>
       </div>
-      <div v-else>
+      <div v-else class="container">
         <AccountForm/>
       </div>
         
@@ -66,6 +86,9 @@ export default {
     },
     userInfo() {
       return this.$store.state.userInfo
+    },
+    lastLogin() {
+      return this.$moment((this.$moment()-this.userInfo.date_joined)).format('MMMM Do YYYY')
     }
   },
   methods: {

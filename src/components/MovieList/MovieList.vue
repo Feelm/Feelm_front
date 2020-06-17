@@ -11,7 +11,7 @@
     <MovieCarousel :movies="recommendedMovies"/> 
     <!-- {{recommendedMovies}} -->
     <br>
-    {{nowplayingMovies}}
+    <!-- {{nowplayingMovies}} -->
 
     <!-- 추천, 최신작 -->
 

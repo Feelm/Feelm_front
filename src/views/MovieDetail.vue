@@ -25,7 +25,7 @@
                 <div class="row">
                   <div class="col-2">
                     <div class="text-secondary" v-if="movie.title!=movie.original_title">{{movie.original_title}}</div>
-                    <div class="">{{movie.release_date}}</div>
+                    <div class="">{{$moment(movie.release_date).format("MMM Do")}}</div>
                   </div>
                   <div class="col-2">
                     <!-- {{movie.star}} -->
@@ -33,7 +33,7 @@
                   </div>
                 </div>
                 <div class="">
-                  <i class="fas fa-heart" style="color: rgb(255,0,0,0.5); font-size:"></i>
+                  <i class="fas fa-heart " style="color: rgb(255,0,0,0.5); font-size:"></i>
                   {{movie.popularity}}
                 </div>
                 <br>
@@ -41,13 +41,20 @@
               </div>
             </div>
             <div class="container">
+              <!-- <button type="button" data-toggle="modal" data-target="#reviewFormModal">글쓰기</button> -->
+              <v-btn class="mx-2" fab dark small color="cyan" type="button" data-toggle="modal" data-target="#reviewFormModal">
+                <v-icon dark>mdi-pencil</v-icon>
+              </v-btn>
+              <v-btn class="mx-2" fab dark small color="pink">
+                <v-icon dark>mdi-heart</v-icon>
+              </v-btn>
               <hr>
-              <div v-for="review in reviews" :key="review.id" class="row reviewlist" @click="reviewDetail(review)" type="button" data-toggle="modal" data-target="#reviewModal">
+              <div v-for="review in reviews" :key="review.id" class="row reviewlist " @click="reviewDetail(review)" type="button" data-toggle="modal" data-target="#reviewModal">
                 <div class="col-7">
                   {{review.title}}
                 </div>
                 <div class="col-3">
-                  {{review.created_at}}
+                  {{$moment(review.created_at).format("MMM Do")}}
                 </div>
                 <div class="col-2">
                   {{review.user}}
@@ -57,9 +64,7 @@
             </div>
           </div>
         <!-- 모달파트 시작 -->
-
-          
-          
+          <!-- 리뷰디텔 -->
           <div v-if="modalReview != null" class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -72,29 +77,54 @@
                 <div class="modal-body row">
                   <div class="col-6">
                     <p style="display: block">작성자 : {{this.modalReview.user}}</p>
+                    <v-btn class="mx-2" fab dark x-small color="pink" @click="likeReview(modalReview)">
+                      <v-icon dark>mdi-heart</v-icon>
+                    </v-btn>
                     {{modalReview.like}}
-                    <i class="fas fa-heart" style="color: rgb(255,0,0,0.5); font-size:"></i>
                   </div>
                   <div class="col-6">
                     <p style="display: block; text-align: right;">조회수 : {{this.modalReview.view_count}}</p>
-                    <p style="color: rgb(0,0,0,0.5); text-align: right;">{{this.modalReview.updated_at}}</p>
+                    <p style="color: rgb(0,0,0,0.5); text-align: right;">{{this.$moment(this.modalReview.updated_at).format("MMM Do")}}</p>
                   </div>
                   <p class="m-2">{{this.modalReview.content}}</p>
-                </div>
+                </div>  
                 <div class="container">
                   <div v-for="comment in modalReview.comments" :key="comment.id">
-                    <button class="btn-sm btn-danger d-inline">삭제</button>
+                    <button class="btn-sm btn-danger d-inline" @click="deleteComment(modalReview, comment.id)">삭제</button>
                     <p class="d-inline"> {{comment.user}} : {{comment.content}}</p>
                   </div>
                   <br>
-                  <input type="text" v-model="comment" style="border: solid; width: 60%; display: inline; margin: auto;">
-                  <button type="button" class="btn btn-primary text-white display: inline; margin: auto;" @click="createComment(this.modalReview)">댓글 작성하기</button>
+                  <input type="text" v-model="commentContext" style="border: solid; width: 60%; display: inline; margin: auto;" @keypress.enter="createComment(modalReview)">
+                  <button type="button" class="btn btn-primary text-white display: inline; margin: auto;" @click="createComment(modalReview)">댓글 작성하기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 리뷰작성 -->
+          <div class="modal fade" id="reviewFormModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="container">
+                  <v-text-field
+                    label="제목"
+                    v-model="reviewForm.title"
+                  ></v-text-field>
+                  <br>
+                  <v-textarea
+                    outlined
+                    name="input-7-4"
+                    label="본문"
+                    v-model="reviewForm.content"
+                  ></v-textarea>
+                  <v-btn @click="createReview" color="primary" fab small dark>
+                    <v-icon>mdi-pencil</v-icon>
+                  </v-btn>
                 </div>
               </div>
             </div>
           </div>
         <!-- 모달파트 끝 -->
-
+        <br class="backg">
         </div>
 
         <div class="floater"></div><div class="floater"></div><div class="floater"></div>
@@ -110,6 +140,8 @@
 import SERVER from '@/api/djangoAPI'
 import axios from 'axios'
 import NavBar from '@/components/home/NavBar.vue'
+import { mapActions } from 'vuex'
+
 export default {
   name: "MovieDetail",
   components: {
@@ -121,10 +153,15 @@ export default {
       movie: null,
       reviews: null,
       modalReview: null,
-      comment: null,
+      commentContext: null,
+      reviewForm: {
+        title: null,
+        content: null,
+      },
     }
   },
   methods: {
+    ...mapActions(['authInfo']),
     reviewDetail(review) {
       axios.get(SERVER.URL + `/movies/${this.movie.id}/reviews/${review.id}/`).then(res=>{
         this.modalReview = res.data
@@ -133,15 +170,56 @@ export default {
     createComment(review) {
       const info = {
         data: {
-          content: this.comment,
+          content: this.commentContext,
         },
         location: `/movies/${this.movie.id}/reviews/${review.id}/comments/`,
         header: {headers: {Authorization: `Token ${this.$cookies.get('auth-token')}`} },
       }
-      axios.post(SERVER.URL + info.location, info.data, info.geader).then(res=>{
+      axios.post(SERVER.URL + info.location, info.data, info.header).then(res=>{
         console.log(res)
+        this.commentContext = null
+        // this.modalReview = null
+        this.reviewDetail(review)
       }).catch(err=>console.log(err.response))
-    }
+    },
+    deleteComment(review, commentId) {
+      const info = {
+        location: `/movies/${this.movie.id}/reviews/${review.id}/comments/${commentId}/`,
+        header: {headers: {Authorization: `Token ${this.$cookies.get('auth-token')}`} },
+      }
+      axios.delete(SERVER.URL + info.location, info.header).then(res=>{
+        console.log(res)
+        this.commentContext = null
+        this.reviewDetail(review)
+      }).catch(err=>console.log(err.response,111111))
+    },
+    createReview() {
+      const info = {
+        data: {
+          title: this.reviewForm.title,
+          content: this.reviewForm.content
+        },
+        location: `/movies/${this.movie.id}/reviews/`,
+        header: {headers: {Authorization: `Token ${this.$cookies.get('auth-token')}`} },
+      }
+      axios.post(SERVER.URL + info.location, info.data, info.header).then(res=>{
+        console.log(res)
+        this.reviewForm.title = null
+        this.reviewForm.content = null
+        location.reload()
+        this.authInfo()
+      }).catch(err=>console.log(err.response))
+    },
+    likeReview(review) {
+      const info = {
+        location: `/movies/${this.movie.id}/reviews/${review.id}/like/`,
+        header: {headers: {Authorization: `Token ${this.$cookies.get('auth-token')}`} },
+      }
+      axios.post(SERVER.URL + info.location, null, info.header).then(res=>{
+        console.log(res)
+        this.reviewDetail(review)
+      }).catch(err=>console.log(err.response))
+    },
   },
   mounted() {
     axios.get(SERVER.URL + SERVER.ROUTES.getMovies + `${this.$route.params.movieId}`).then(res=>{
@@ -153,6 +231,7 @@ export default {
       console.log(res.data,11111111111)
     }).catch(err=>console.log(err.response))
     console.log(22222222222222)
+    this.authInfo()
   }
 }
 
@@ -192,7 +271,7 @@ export default {
   height: 100px;
 }
 .reviewlist:hover {
-  background-color: gray;
+  background-color: rgb(0,0,0,0.1);
   cursor: pointer;
   transition: background-color 1s;
 }

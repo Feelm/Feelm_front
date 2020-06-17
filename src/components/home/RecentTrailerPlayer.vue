@@ -14,6 +14,10 @@
                 <div class="title1">
                     {{this.$store.state.videoData.title}}
                 </div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <star-rating :rating="$store.state.videoData.star/2" :read-only="true" :round-start-rating="false" :star-size="40" class="star text-white col-4"></star-rating>
+                </div>
                 <div class="content1 m-5">
                     {{this.$store.state.videoData.overview}}
                     <!-- {{this.$store.state.videoData.id}} -->
@@ -53,6 +57,9 @@ export default {
 </script>
 
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
     .iframebox {
         position: relative;
         width: 100%;
@@ -77,13 +84,14 @@ export default {
     .title1 {
         text-align: center;
         color: white;
-        font-size: 60px;
-        font-family: Arial, Helvetica, sans-serif;
+        font-size: 70px;
+        font-family: 'Jeju Hallasan', cursive;
     }
     .content1 {
         color: rgba(200,200,200,0.5);
         font-size: 20px;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: 'Jeju Myeongjo', serif;
+
     }
     .leftside {
         width: 200px;
