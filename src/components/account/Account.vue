@@ -9,6 +9,8 @@
 
       <v-toolbar-title ><img src="@/assets/feelm/feelm_logo_letter_shadow.png" alt="" class="mt-5 navbarLogo"  @click="goHome"></v-toolbar-title>
       <v-spacer></v-spacer>
+      <span class="mr-5" @click="$router.push('/board/free/')">자유게시판</span>
+      <span class="mr-5" @click="$router.push('/board/request/')">요청게시판</span>
       <v-icon @click="drawer = true">mdi-account</v-icon>
       <!-- <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon> -->
       
@@ -41,11 +43,10 @@
           
           <div v-if="!!userInfo">
             <!-- <button @click="authInfo">정보가져와</button> -->
-            <p style="font-size: 20px">{{userInfo.name}} 님 어서오세요 <i class="fas fa-sign-out-alt" style="color: rgb(255,50,50,1); font-size: 20px"></i></p>
+            <p style="font-size: 20px">{{userInfo.name}} 님 어서오세요 <i class="fas fa-sign-out-alt" style="color: rgb(255,50,50,1); font-size: 20px" @click="logout"></i></p>
             <p>마지막 로그인 : {{$moment(this.userInfo.last_login, "YYYYMMDD").fromNow()}}<p/>
             <p>나이 : {{userInfo.age}}</p>
 
-                    {{this.lastLogin}}
 
             <p>성별 : {{userInfo.sex===0?'남자':'여자'}}</p>
             <p>e-mail : {{userInfo.email}}</p>
@@ -111,5 +112,7 @@ export default {
   height: 60px;
   cursor: pointer;
 }
-
+.fa-sign-out-alt:hover {
+  cursor: pointer;
+}
 </style>

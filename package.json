@@ -10,11 +10,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
-<<<<<<< HEAD
     "moment": "^2.26.0",
-=======
     "date-fns": "^2.14.0",
->>>>>>> fc342b25de720493b0429b29b92838ede516269f
     "vue": "^2.6.11",
     "vue-cookies": "^1.7.0",
     "vue-moment": "^4.1.0",

@@ -10,13 +10,15 @@
  white--text text-center"
     >
       <v-card-text>
+        
         <v-btn
           v-for="icon in icons"
           :key="icon"
           class="mx-4 white--text"
           icon
         >
-          <v-icon size="24px">{{ icon }}</v-icon>
+        <a href="https://www.instagram.com/h_zzzeeee/" target="_blank" style="color: white; text-decoration: none;">
+          <v-icon size="24px">{{ icon }}</v-icon></a>
         </v-btn>
       </v-card-text>
 

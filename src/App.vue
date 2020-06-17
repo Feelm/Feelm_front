@@ -3,7 +3,7 @@
     
     <v-content>
       <!-- <NavBar/> -->
-      <router-view/>
+      <router-view :key="$route.fullPath"/>
     </v-content>
 
   </v-app>
